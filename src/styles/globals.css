@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   TATA STEEL LCT — DESIGN SYSTEM TOKENS
+   ============================================ */
+
+:root {
+  /* ── Background System ── */
+  --bg-primary:     #0A0F1E;
+  --bg-surface:     #111827;
+  --bg-elevated:    #1C2333;
+  --bg-border:      #2D3748;
+  --bg-hover:       #1E293B;
+  --bg-active:      #233044;
+
+  /* ── Brand Colors ── */
+  --tata-blue:      #003478;
+  --accent-blue:    #1A56DB;
+  --accent-blue-lt: #3B82F6;
+  --accent-blue-dim:#1A56DB33;
+
+  /* ── Status Colors ── */
+  --status-green:   #10B981;
+  --status-red:     #EF4444;
+  --status-amber:   #F59E0B;
+  --status-gray:    #6B7280;
+  --status-blue:    #3B82F6;
+
+  /* Status with alpha */
+  --status-green-bg:  #10B98115;
+  --status-red-bg:    #EF444415;
+  --status-amber-bg:  #F59E0B15;
+  --status-gray-bg:   #6B728015;
+  --status-blue-bg:   #3B82F615;
+
+  /* ── Typography Colors ── */
+  --text-primary:   #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-tertiary:  #475569;
+
+  /* ── Spacing Scale ── */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+
+  /* ── Border Radius ── */
+  --radius-sm:  0.375rem;
+  --radius-md:  0.5rem;
+  --radius-lg:  0.75rem;
+  --radius-xl:  1rem;
+  --radius-full: 9999px;
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* ── Z-Index Scale ── */
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-navbar: 200;
+  --z-modal-backdrop: 300;
+  --z-modal: 400;
+  --z-alert: 500;
+  --z-tooltip: 600;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   SCROLLBAR STYLES
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ============================================
+   COMPONENT LAYER — REUSABLE PATTERNS
+   ============================================ */
+
+@layer components {
+  /* ── Card System ── */
+  .card {
+    @apply rounded-lg border transition-all duration-200;
+    background: var(--bg-surface);
+    border-color: var(--bg-border);
+  }
+
+  .card:hover {
+    border-color: var(--accent-blue-dim);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-elevated {
+    @apply rounded-lg border transition-all duration-200;
+    background: var(--bg-elevated);
+    border-color: var(--bg-border);
+  }
+
+  /* ── KPI Display ── */
+  .kpi-value {
+    @apply text-kpi tracking-tight;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kpi-value-sm {
+    @apply text-kpi-sm tracking-tight;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kpi-label {
+    @apply text-xs font-medium uppercase tracking-wider;
+    color: var(--text-secondary);
+  }
+
+  /* ── Status Badges ── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-green {
+    background: var(--status-green-bg);
+    color: var(--status-green);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .badge-red {
+    background: var(--status-red-bg);
+    color: var(--status-red);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .badge-amber {
+    background: var(--status-amber-bg);
+    color: var(--status-amber);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+
+  .badge-blue {
+    background: var(--status-blue-bg);
+    color: var(--status-blue);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .badge-gray {
+    background: var(--status-gray-bg);
+    color: var(--status-gray);
+    border: 1px solid rgba(107, 114, 128, 0.2);
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .btn-primary {
+    background: var(--accent-blue);
+    color: var(--text-primary);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-blue-lt);
+    box-shadow: 0 0 20px rgba(26, 86, 219, 0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    border-color: var(--bg-border);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  /* ── Form Inputs ── */
+  .input {
+    @apply w-full px-3 py-2 rounded-lg text-sm transition-all duration-200;
+    background: var(--bg-primary);
+    border: 1px solid var(--bg-border);
+    color: var(--text-primary);
+    outline: none;
+  }
+
+  .input::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  .input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px var(--accent-blue-dim);
+  }
+
+  .select {
+    @apply w-full px-3 py-2 rounded-lg text-sm transition-all duration-200 appearance-none;
+    background: var(--bg-primary);
+    border: 1px solid var(--bg-border);
+    color: var(--text-primary);
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394A3B8' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+  }
+
+  .select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px var(--accent-blue-dim);
+  }
+
+  /* ── Skeleton Loading ── */
+  .skeleton {
+    @apply rounded animate-shimmer;
+    background: linear-gradient(
+      90deg,
+      var(--bg-surface) 25%,
+      var(--bg-elevated) 50%,
+      var(--bg-surface) 75%
+    );
+    background-size: 200% 100%;
+  }
+
+  /* ── Data Table ── */
+  .table-container {
+    @apply overflow-x-auto rounded-lg border;
+    border-color: var(--bg-border);
+  }
+
+  .table-header {
+    @apply text-xs font-semibold uppercase tracking-wider px-4 py-3 text-left;
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--bg-border);
+  }
+
+  .table-cell {
+    @apply px-4 py-3 text-sm;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--bg-border);
+  }
+
+  .table-row {
+    @apply transition-colors duration-150;
+  }
+
+  .table-row:hover {
+    background: var(--bg-hover);
+  }
+
+  /* ── Navigation ── */
+  .nav-tab {
+    @apply px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+    color: var(--text-secondary);
+  }
+
+  .nav-tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+
+  .nav-tab-active {
+    color: var(--text-primary);
+    background: var(--accent-blue);
+  }
+
+  /* ── Tooltip ── */
+  .tooltip {
+    @apply absolute px-2 py-1 rounded text-xs whitespace-nowrap;
+    background: var(--bg-elevated);
+    border: 1px solid var(--bg-border);
+    color: var(--text-primary);
+    z-index: var(--z-tooltip);
+    pointer-events: none;
+  }
+
+  /* ── Alert Banner ── */
+  .alert-banner {
+    @apply fixed bottom-0 left-0 right-0 px-4 py-2 text-sm font-medium flex items-center justify-between;
+    z-index: var(--z-alert);
+  }
+
+  .alert-critical {
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+    border-top: 2px solid var(--status-red);
+    color: var(--status-red);
+  }
+
+  .alert-warning {
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+    border-top: 2px solid var(--status-amber);
+    color: var(--status-amber);
+  }
+
+  .alert-info {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+    border-top: 2px solid var(--status-blue);
+    color: var(--status-blue);
+  }
+}
+
+/* ============================================
+   UTILITY LAYER
+   ============================================ */
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--accent-blue-lt), var(--accent-blue));
+  }
+
+  .glass {
+    backdrop-filter: blur(12px) saturate(180%);
+    background: rgba(17, 24, 39, 0.75);
+    border: 1px solid rgba(45, 55, 72, 0.5);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(26, 86, 219, 0.3), inset 0 0 20px rgba(26, 86, 219, 0.05);
+  }
+
+  .border-gradient {
+    border-image: linear-gradient(to right, var(--accent-blue), var(--tata-blue)) 1;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ============================================
+   LEAFLET MAP OVERRIDES
+   ============================================ */
+
+.leaflet-container {
+  background: var(--bg-primary) !important;
+  border-radius: var(--radius-lg);
+}
+
+.leaflet-tile-pane {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+.leaflet-control-zoom a {
+  background: var(--bg-surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--bg-border) !important;
+}
+
+.leaflet-control-attribution {
+  background: var(--bg-surface) !important;
+  color: var(--text-tertiary) !important;
+  font-size: 0.625rem !important;
+}
+
+/* ============================================
+   ECHARTS OVERRIDES
+   ============================================ */
+
+.echarts-tooltip {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--bg-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+@media (max-width: 1366px) {
+  :root {
+    font-size: 14px;
+  }
+
+  .kpi-value {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 13px;
+  }
+}

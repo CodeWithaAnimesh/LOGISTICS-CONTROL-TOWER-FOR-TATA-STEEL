@@ -1,0 +1,40 @@
+/* This file is intentionally empty — all styles are in src/styles/globals.css */
+
+  /* Global HUD typography & reset */
+  body {
+    @apply bg-[#050A15] text-[#94A3B8] font-sans antialiased overflow-hidden;
+  }
+}
+
+@layer utilities {
+  .sci-fi-panel {
+    background: rgba(11, 18, 32, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.1), 0 0 15px rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .hud-glow-blue {
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+  }
+  .hud-glow-green {
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  }
+  
+  .css-grid-bg {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
